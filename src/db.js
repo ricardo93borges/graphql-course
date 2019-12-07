@@ -1,4 +1,3 @@
-
 const users = [{
     id: '1',
     name: 'Andrew',
@@ -62,4 +61,4 @@ const db = {
     comments
 }
 
-export default db
+export { db as default }

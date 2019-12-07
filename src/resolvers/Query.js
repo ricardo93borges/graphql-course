@@ -39,4 +39,4 @@ const Query = {
     }
 }
 
-export default Query;
+export { Query as default }

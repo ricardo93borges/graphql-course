@@ -15,7 +15,12 @@ type Mutation {
     updatePost(id: ID!, data: UpdatePostInput!): Post!
     createComment(data: CreateCommentInput!): Comment!
     deleteComment(id: ID!): Comment!
-    updateComment(id: ID!, data: updateCommentInput!): Comment!
+    updateComment(id: ID!, data: UpdateCommentInput!): Comment!
+}
+
+type Subscription {
+    comment(postId: ID!): CommentSubscriptionPayload!
+    post: PostSubscriptionPayload!
 }
 
 input CreateUserInput {
@@ -38,9 +43,9 @@ input CreatePostInput {
 }
 
 input UpdatePostInput {
-    title: String!
-    body: String!
-    published: Boolean!
+    title: String
+    body: String
+    published: Boolean
 }
 
 input CreateCommentInput {
@@ -49,8 +54,8 @@ input CreateCommentInput {
     post: ID!
 }
 
-input updateCommentInput {
-    text: String!
+input UpdateCommentInput {
+    text: String
 }
 
 type User {
@@ -76,4 +81,20 @@ type Comment {
     text: String!
     author: User!
     post: Post!
+}
+
+enum MutationType {
+    CREATED
+    UPDATED
+    DELETED
+}
+
+type PostSubscriptionPayload {
+    mutation: MutationType!
+    data: Post!
+}
+
+type CommentSubscriptionPayload {
+    mutation: MutationType!
+    data: Comment!
 }
