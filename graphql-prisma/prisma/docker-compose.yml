@@ -13,7 +13,7 @@ services:
         databases:
           default:
             connector: mysql
-            host: 172.19.0.2
+            host: mysql
             user: root
             password: prisma
             rawAccess: true
