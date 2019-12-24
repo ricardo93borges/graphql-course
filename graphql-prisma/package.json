@@ -4,17 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js --ext js,graphql --exec babel-node",
+    "start": "env-cmd -f ./config/prod.env node dist/index.js",
+    "heroku-postbuild": "babel src --out-dir dist --copy-files",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js --ext js,graphql --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "get-schema": "graphql get-schema -e http://172.19.0.2:4466/ -o src/generated/prisma.graphql --header Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJkZWZhdWx0QGRlZmF1bHQiLCJyb2xlcyI6WyJhZG1pbiJdfSwiaWF0IjoxNTc2NTMwODYwLCJleHAiOjE1NzcxMzU2NjB9.CdRHqAPRqbjAWNWOKG8N8pPbNLOUdY4iqdUK0B52iBU"
+    "get-schema": "graphql get-schema -e http://172.19.0.3:4466/ -o src/generated/prisma.graphql --header Authorization=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InNlcnZpY2UiOiJkZWZhdWx0QGRlZmF1bHQiLCJyb2xlcyI6WyJhZG1pbiJdfSwiaWF0IjoxNTc3MTk0NDAzLCJleHAiOjE1Nzc3OTkyMDN9.oLydOKGVNnjga-akoyYKVPJrNCYlQexCKRuBtG9CF44"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.7.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "bcrypt": "^3.0.7",
+    "env-cmd": "^10.0.1",
     "graphql-cli": "^3.0.14",
     "graphql-yoga": "^1.16.7",
     "jsonwebtoken": "^8.5.1",
